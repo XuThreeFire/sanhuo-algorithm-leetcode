@@ -3,10 +3,10 @@ package main
 // 1，先穷举出来，画一个N叉树图，
 // 2, 分析出不符合的分支特点
 // 此题中，不符合分支的特点是，同层重复
-var res = [][]int{} // 存储结果
-var used = []bool{} // 标记是否已经扫过 记录nums的索引
-var track = []int{} // 排列结果
-var trackLen = 0
+//var res = [][]int{} // 存储结果
+//var used []bool // 标记是否已经扫过 记录nums的索引
+//var track = []int{} // 排列结果
+//var trackLen = 0
 var lenNums = 0
 
 func main() {
@@ -26,11 +26,11 @@ func permuteUnique(nums []int) [][]int {
 	track = make([]int, lenNums)
 	used = make([]bool, lenNums)
 	res = [][]int{}
-	backtrack(nums)
+	backtrack47(nums)
 	return res
 }
 
-func backtrack(nums []int) {
+func backtrack47(nums []int) {
 	if trackLen == lenNums {
 		t1 := make([]int, lenNums)
 		copy(t1, track)
@@ -54,7 +54,7 @@ func backtrack(nums []int) {
 		trackLen += 1
 		used[i] = true
 		tempUsed[nums[i]] = struct{}{} // 标记这个数字 nums[i] 已经选择过
-		backtrack(nums)
+		backtrack47(nums)
 		trackLen -= 1
 		used[i] = false
 	}

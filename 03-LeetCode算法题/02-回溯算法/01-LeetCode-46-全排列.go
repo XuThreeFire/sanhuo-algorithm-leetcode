@@ -8,7 +8,7 @@ func main() {
 	fmt.Println(result)
 }
 
-var used = map[int]bool{}
+var used = []bool{}
 var track = []int{}
 var trackLen = 0
 var res = [][]int{}
@@ -21,14 +21,14 @@ func permute(nums []int) [][]int {
 		}
 	}
 	res = [][]int{}
-	used = map[int]bool{}
+	used = []bool{}
 	track = make([]int, n)
 	trackLen = 0
-	backtrack(nums)
+	backtrack46(nums)
 	return res
 }
 
-func backtrack(nums []int) {
+func backtrack46(nums []int) {
 	if trackLen == len(nums) {
 		res = append(res, track)
 		return
@@ -40,7 +40,7 @@ func backtrack(nums []int) {
 		track[trackLen] = nums[i]
 		trackLen += 1        // 往前移位
 		used[nums[i]] = true // 标记使用过
-		backtrack(nums)
+		backtrack46(nums)
 		//
 		used[nums[i]] = false // 标记剔除
 		trackLen -= 1         // 往后移位

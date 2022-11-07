@@ -43,7 +43,7 @@ func dp(coins []int, amount int) int {
 		if subRes == -1 {
 			continue
 		}
-		res = getMin(res, subRes+1)
+		res = min(res, subRes+1)
 	}
 	if res == 1000000 {
 		memo[amount] = -1
@@ -59,13 +59,14 @@ func coinChangeDp2(coins []int, amount int) int {
 	var Max = amount + 1
 	var dp = make([]int, amount+1)
 	dp[0] = 0 //
+	// 从1块钱开始遍历，遍历全部的金额，直到终点金额
 	for i := 1; i <= amount; i++ {
 		dp[i] = Max
 		// 遍历全部硬币数量，选择最少的硬币数量
 		// res = min(不兑换, 选择兑换1, 选择兑换2, 选择兑换3, 选择兑换5)
 		for _, coin := range coins {
 			if coin <= i {
-				dp[i] = getMin(dp[i], dp[i-coin]+1) // 兑换次数+1
+				dp[i] = min(dp[i], dp[i-coin]+1) // 兑换次数+1
 			}
 		}
 	}
@@ -76,9 +77,9 @@ func coinChangeDp2(coins []int, amount int) int {
 	return dp[amount]
 }
 
-func getMin(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
+//func min(a, b int) int {
+//	if a < b {
+//		return a
+//	}
+//	return b
+//}
