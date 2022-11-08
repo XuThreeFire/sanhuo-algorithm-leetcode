@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 // 思路
+// 本质上最大收益 = 全部k>0的曲线段，只要这个直线是向上的，那么这条线的收益就全部迟到
 // 股票不限次数交易，那么只有有收益，那么就要交易，
-
+// 只有有上升趋势，那么收益就会更新
+//
 func maxProfit122(prices []int) int {
 	// 1, 自底向上：从第一天开始解决股票问题
 	// return maxProfitDp(prices)
