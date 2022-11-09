@@ -18,6 +18,7 @@ func maxProfit(prices []int) int {
 		minPrice = min(minPrice, prices[i])
 	}
 	return maxValue
+
 }
 
 // 1, 暴力法：超时
