@@ -43,20 +43,16 @@ func maxProfitOptimize(prices []int) int {
 		return 0
 	}
 	var (
-		dpHaveStockProfit0 = -prices[0]
-		dpNoStockProfit0   = 0
-		dpHaveStockProfit1 = 0
-		dpNoStockProfit1   = 0
+		buy1  = -prices[0]
+		sell1 = 0
 	)
-	fmt.Printf("第[%d]次，dp有：%d, dp无：%d\n", 0, dpHaveStockProfit0, dpNoStockProfit0)
+	fmt.Printf("第[%d]次，dp有：%d, dp无：%d\n", 0, buy1, sell1)
 	for i := 1; i < n; i++ {
 		// 有股票的状态怎来的？：昨天有股票的转移，昨天没有股票但今天买的
-		dpHaveStockProfit1 = max(dpHaveStockProfit0, dpNoStockProfit0-prices[i])
+		buy1 = max(buy1, sell1-prices[i])
 		// 无股票的状态怎来的？：昨天无股票的转移，昨天有股票，但今天卖了
-		dpNoStockProfit1 = max(dpNoStockProfit0, dpHaveStockProfit0+prices[i])
-		dpNoStockProfit0 = dpNoStockProfit1
-		dpHaveStockProfit0 = dpHaveStockProfit1
-		fmt.Printf("第[%d]次，dp有：%d, dp无：%d\n", i, dpHaveStockProfit0, dpNoStockProfit0)
+		sell1 = max(sell1, buy1+prices[i])
+		fmt.Printf("第[%d]次，dp有：%d, dp无：%d\n", i, buy1, sell1)
 	}
-	return dpNoStockProfit1 // max(dp有股票, dp无股票) 最后结果肯定是没有股票的状态>有股票的状态
+	return sell1 // max(dp有股票, dp无股票) 最后结果肯定是没有股票的状态>有股票的状态
 }
